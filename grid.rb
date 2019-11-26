@@ -2,7 +2,7 @@
 # @Date:   2019-11-24T22:37:04-06:00
 # @Email:  silentcat@protonmail.com
 # @Last modified by:   silentcat
-# @Last modified time: 2019-11-24T23:27:19-06:00
+# @Last modified time: 2019-11-25T18:13:11-06:00
 
 require 'cell'
 require 'chunky_png'
@@ -68,6 +68,10 @@ class Grid
     end
   end
 
+  def contents_of(cell)
+    " "
+  end
+
   def to_s
     output = "+" + "---+" * columns + "\n"
 
@@ -78,7 +82,7 @@ class Grid
       row.each do |cell|
         cell = Cell.new(-1, -1) unless cell
 
-        body = "   "
+        body = " #{contents_of(cell)} "
         east_boundary = (cell.linked?(cell.east) ? " " : "|")
         top << body << east_boundary
         south_boundary = (cell.linked?(cell.south) ? "   " : "---")
@@ -116,7 +120,7 @@ class Grid
     end
 
     img
-    
+
   end
 
 end
