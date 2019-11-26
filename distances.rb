@@ -2,7 +2,7 @@
 # @Date:   2019-11-25T18:04:55-06:00
 # @Email:  silentcat@protonmail.com
 # @Last modified by:   silentcat
-# @Last modified time: 2019-11-25T18:26:19-06:00
+# @Last modified time: 2019-11-25T18:35:30-06:00
 
 class Distances
 
@@ -40,5 +40,19 @@ class Distances
       end
     end
       breadcrumbs
+  end
+
+  def max
+    max_distance = 0
+    max_cell = @root
+
+    @cells.each do |cell, distance|
+      if distance > max_distance
+        max_cell = cell
+        max_distance = distance
+      end
+    end
+
+    [max_cell, max_distance]
   end
 end
