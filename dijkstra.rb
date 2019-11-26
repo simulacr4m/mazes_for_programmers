@@ -2,13 +2,28 @@
 # @Date:   2019-11-25T18:14:55-06:00
 # @Email:  silentcat@protonmail.com
 # @Last modified by:   silentcat
-# @Last modified time: 2019-11-25T18:15:58-06:00
+# @Last modified time: 2019-11-25T18:21:19-06:00
 
 require 'distance_grid'
 require 'binary_tree'
+require 'sidewinder'
 
-grid = DistanceGrid.new(5, 5)
-BinaryTree.on(grid)
+printf "Enter algorithm: "
+algo = gets
+printf "Enter rows: "
+rows = Integer(gets)
+printf "Enter columns "
+columns = Integer(gets)
+
+grid = DistanceGrid.new(rows, columns)
+
+if algo.eql? "Binary Tree\n"
+  BinaryTree.on(grid)
+elsif algo.eql? "Sidewinder\n"
+  Sidewinder.on(grid)
+else
+  puts "No such algorithm exists"
+end
 
 start = grid[0, 0]
 distances = start.distances
