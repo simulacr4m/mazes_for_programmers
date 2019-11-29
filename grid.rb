@@ -2,17 +2,18 @@
 # @Date:   2019-11-24T22:37:04-06:00
 # @Email:  silentcat@protonmail.com
 # @Last modified by:   silentcat
-# @Last modified time: 2019-11-25T19:01:03-06:00
+# @Last modified time: 2019-11-28T18:54:03-06:00
 
 require 'cell'
 require 'chunky_png'
 
 class Grid
-  attr_reader :rows, :columns
+  attr_reader :rows, :columns, :cell_width
 
   def initialize(rows, columns)
     @rows = rows
     @columns = columns
+    @cell_width = "-" * 3
 
     @grid = prepare_grid
     configure_cells
@@ -77,7 +78,9 @@ class Grid
   end
 
   def to_s
-    output = "+" + "---+" * columns + "\n"
+    mcell, mdist = self.distances.max
+    len = mdist.to_s.length
+    output = "+" + ("---" * len + "+") * columns + "\n"
 
     each_row do |row|
       top = "|"
@@ -86,10 +89,11 @@ class Grid
       row.each do |cell|
         cell = Cell.new(-1, -1) unless cell
 
-        body = " #{contents_of(cell)} "
-        east_boundary = (cell.linked?(cell.east) ? " " : "|")
+        spaces = len > 1 ? " " * len*(len-1) : " "
+        body = spaces + ("%-" + String(3*len-spaces.length) + "s") % contents_of(cell)
+        east_boundary = (cell.linked?(cell.east) ? " ": "|")
         top << body << east_boundary
-        south_boundary = (cell.linked?(cell.south) ? "   " : "---")
+        south_boundary = (cell.linked?(cell.south) ? "   " * len : "---" * len)
         corner = "+"
         bottom << south_boundary << corner
       end
