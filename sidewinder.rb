@@ -2,15 +2,16 @@
 # @Date:   2019-11-24T23:03:43-06:00
 # @Email:  silentcat@protonmail.com
 # @Last modified by:   silentcat
-# @Last modified time: 2019-11-24T23:05:47-06:00
+# @Last modified time: 2019-12-18T20:38:20-06:00
 
 class Sidewinder
 
-  def self.on(grid)
-    grid.each_row do |row|
+  def self.on(grid, rstart=0, rend=grid.rows-1, cstart=0, cend=grid.columns-1)
+    for row in rstart..rend
       run = []
 
-      row.each do |cell|
+      for column in cstart..cend
+        cell = grid[row, column]
         run << cell
 
         at_eastern_boundary = (cell.east == nil)
