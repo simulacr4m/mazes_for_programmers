@@ -2,11 +2,11 @@
 # @Date:   2019-12-19T22:23:10-06:00
 # @Email:  silentcat@protonmail.com
 # @Last modified by:   silentcat
-# @Last modified time: 2019-12-19T22:24:40-06:00
+# @Last modified time: 2019-12-19T22:26:29-06:00
 
 class RecursiveBacktracker
 
-  def self.on(grid, start_at : grid.random_cell)
+  def self.on(grid, start_at: grid.random_cell)
     stack = []
     stack.push start_at
     while stack.any?
@@ -24,5 +24,5 @@ class RecursiveBacktracker
 
     grid
   end
-  
+
 end
