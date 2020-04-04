@@ -2,7 +2,7 @@
 # @Date:   2019-11-24T22:37:04-06:00
 # @Email:  silentcat@protonmail.com
 # @Last modified by:   silentcat
-# @Last modified time: 2019-12-18T20:30:50-06:00
+# @Last modified time: 2019-12-19T22:06:59-06:00
 
 require 'cell'
 require 'chunky_png'
@@ -136,5 +136,15 @@ class Grid
       end
     end
     img
+  end
+
+  def deadends
+    list = []
+
+    each_cell do |cell|
+      list << cell if cell.links.count == 1
+    end
+
+    list
   end
 end
